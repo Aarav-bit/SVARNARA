@@ -1,0 +1,159 @@
+.reservations {
+  padding: 10rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.res-bg-gradient {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(107,26,42,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(244,167,32,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.reservation-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.res-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: var(--cream);
+}
+
+.res-subtext {
+  color: var(--cream-dim);
+  margin-top: 1.2rem;
+  line-height: 1.85;
+  font-size: 0.98rem;
+}
+
+/* Form */
+.reservation-form {
+  margin-top: 3.5rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group.full { width: 100%; }
+
+.form-group label {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--gold), var(--saffron));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-gold);
+  color: var(--cream);
+  padding: 0.8rem 0;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 300;
+  outline: none;
+  transition: border-color var(--tr-fast), box-shadow var(--tr-fast);
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23C9A84C' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  padding-right: 1.5rem;
+}
+
+.form-group select option {
+  background: #1C1510;
+  color: var(--cream);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-bottom-color: var(--saffron);
+  box-shadow: 0 2px 0 rgba(244,167,32,0.15);
+}
+
+.form-group textarea {
+  resize: none;
+  line-height: 1.7;
+}
+
+.form-submit {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.res-note {
+  margin-top: 1.2rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: var(--font-label);
+  letter-spacing: 0.12em;
+  line-height: 1.8;
+}
+
+/* Toast */
+.res-toast {
+  position: fixed;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: rgba(13, 10, 7, 0.97);
+  border: 1px solid var(--gold);
+  border-left: 3px solid var(--saffron);
+  color: var(--cream);
+  padding: 1.1rem 2.4rem;
+  border-radius: 2px;
+  z-index: 9999;
+  max-width: 500px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  box-shadow: 0 8px 40px rgba(201, 168, 76, 0.2);
+  pointer-events: none;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.res-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
+}

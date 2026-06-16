@@ -1,0 +1,501 @@
+/* ═══════════════════════════════════════════════════════════
+   MENU SECTION — Luxury Redesign
+   ═══════════════════════════════════════════════════════════ */
+
+.menu {
+  padding: 8rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Ambient background glow ── */
+.menu-ambient {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%,   rgba(201,168,76,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 60%,  rgba(107,26,42,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 40%,  rgba(107,26,42,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 0%, rgba(13,10,7,0.4) 100%);
+  pointer-events: none;
+}
+
+/* Top & bottom gold rule */
+.menu::before,
+.menu::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; height: 1px;
+}
+.menu::before {
+  top: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--saffron) 30%, var(--gold) 50%, var(--saffron) 70%, transparent 100%);
+}
+.menu::after {
+  bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--saffron) 50%, var(--gold) 70%, transparent 100%);
+}
+
+/* ── Section header ── */
+.menu-section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.menu-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 0.8rem;
+}
+.menu-subheading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--cream-dim);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Tab Bar ── */
+.menu-tabbar {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.menu-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 1rem 2.2rem;
+  color: var(--cream-dim);
+  cursor: pointer;
+  background: rgba(13,10,7,0.6);
+  border: 1px solid var(--border-gold);
+  border-right: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.menu-tab:first-child { border-radius: 2px 0 0 2px; }
+.menu-tab:last-child  { border-right: 1px solid var(--border-gold); border-radius: 0 2px 2px 0; }
+.menu-tab:hover {
+  color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+
+.menu-tab.active {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
+  color: var(--espresso);
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: 0 4px 24px rgba(201,168,76,0.35);
+}
+
+.tab-icon {
+  font-size: 8px;
+  opacity: 0.6;
+}
+.menu-tab.active .tab-icon { opacity: 1; }
+
+/* ── Category Banner ── */
+.menu-category-banner {
+  position: relative;
+  height: 340px;
+  margin: 0 0 5rem;
+  overflow: hidden;
+  animation: bannerReveal 0.7s ease both;
+}
+
+@keyframes bannerReveal {
+  from { opacity: 0; transform: translateY(15px); clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; transform: translateY(0);    clip-path: inset(0 0 0% 0); }
+}
+
+.banner-img-wrap {
+  position: absolute; inset: 0;
+}
+.banner-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: brightness(0.45) saturate(0.85) contrast(1.1);
+  transform: scale(1.04);
+  transition: transform 8s ease;
+}
+.menu-category-banner:hover .banner-img-wrap img {
+  transform: scale(1.08);
+}
+
+.banner-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(13,10,7,0.95) 0%,
+    rgba(13,10,7,0.75) 30%,
+    rgba(13,10,7,0.3) 60%,
+    rgba(13,10,7,0.6) 100%
+  ),
+  linear-gradient(
+    to bottom,
+    rgba(13,10,7,0.3) 0%,
+    transparent 40%,
+    rgba(13,10,7,0.8) 100%
+  );
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%; left: 6%;
+  transform: translateY(-50%);
+  z-index: 2;
+  max-width: 460px;
+}
+
+.banner-label {
+  animation: fadeUp 0.5s ease both 0.1s;
+}
+
+.banner-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  margin: 1rem 0;
+  background: linear-gradient(135deg, var(--cream) 40%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeUp 0.6s ease both 0.2s;
+}
+
+.banner-desc {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--cream-dim);
+  line-height: 1.7;
+  animation: fadeUp 0.6s ease both 0.3s;
+}
+
+.banner-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  animation: fadeUp 0.6s ease both 0.4s;
+}
+.ornament-line {
+  flex: 1;
+  max-width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+}
+.ornament-diamond {
+  font-size: 8px;
+  color: var(--gold);
+}
+
+/* ── Card Grid ── */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  grid-auto-rows: auto;
+}
+
+/* ── Featured Card (spans full width, first row) ── */
+.menu-card--featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  background: linear-gradient(135deg, rgba(22,17,9,0.98) 0%, rgba(26,13,16,0.95) 100%);
+  border: 1px solid var(--border-gold);
+  position: relative;
+  overflow: hidden;
+  animation: menuCardIn 0.6s ease both;
+  transition: box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+.menu-card--featured:hover {
+  border-color: var(--gold);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(201,168,76,0.25),
+    inset 0 0 80px rgba(201,168,76,0.04);
+}
+
+.featured-img-wrap {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+.featured-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+  filter: brightness(0.88) contrast(1.05) saturate(0.9);
+}
+.menu-card--featured:hover .featured-img-wrap img {
+  transform: scale(1.06);
+}
+
+.featured-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(13,10,7,0.3) 0%,
+    transparent 50%,
+    rgba(26,13,16,0.6) 100%
+  );
+}
+
+.featured-badge {
+  position: absolute;
+  top: 1.5rem; left: 1.5rem;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--saffron) 100%);
+  color: var(--espresso);
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.featured-body {
+  padding: 3rem 3rem 3rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+/* ── Regular Card ── */
+.menu-card {
+  background: linear-gradient(160deg, rgba(22,17,9,0.97) 0%, rgba(20,12,8,0.95) 100%);
+  border: 1px solid var(--border-gold);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+  animation: menuCardIn 0.55s ease both;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(201,168,76,0.55);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(201,168,76,0.2),
+    inset 0 0 40px rgba(201,168,76,0.03);
+}
+
+/* Image on regular card */
+.card-img-wrap {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+.card-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+  filter: brightness(0.82) contrast(1.06) saturate(0.85);
+}
+.menu-card:hover .card-img-wrap img {
+  transform: scale(1.08);
+}
+
+.card-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(13,10,7,0.1) 0%,
+    rgba(13,10,7,0.75) 100%
+  );
+  transition: opacity 0.45s ease;
+}
+.card-img-overlay.hovered {
+  background: linear-gradient(
+    to bottom,
+    rgba(107,26,42,0.2) 0%,
+    rgba(13,10,7,0.75) 100%
+  );
+}
+
+.card-body {
+  padding: 1.6rem 1.8rem 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Border sweep on hover */
+.card-border-anim {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--burgundy), var(--gold), var(--saffron));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+.menu-card:hover .card-border-anim { transform: scaleX(1); }
+
+/* Shimmer on featured */
+.card-shimmer {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.9s ease;
+  pointer-events: none;
+}
+.menu-card--featured:hover .card-shimmer { left: 150%; }
+
+/* ── Shared dish typography ── */
+.dish-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.dish-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.2;
+  background: linear-gradient(135deg, var(--gold-light) 30%, var(--saffron) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.dish-name--lg {
+  font-size: 1.9rem;
+  font-weight: 400;
+}
+
+.dish-price {
+  font-family: var(--font-label);
+  font-size: 0.95rem;
+  color: var(--gold);
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+.dish-price--lg {
+  font-size: 1.25rem;
+}
+
+.dish-desc {
+  font-size: 0.875rem;
+  color: var(--cream-dim);
+  line-height: 1.8;
+}
+
+.dish-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.dish-tag {
+  font-family: var(--font-label);
+  font-size: 7.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.75rem;
+  border: 1px solid var(--border-gold);
+  color: var(--cream-dim);
+}
+
+/* ── Menu footer ornament ── */
+.menu-footer-note {
+  text-align: center;
+  margin-top: 5rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(201,168,76,0.12);
+}
+
+.menu-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.menu-ornament .ornament-line {
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.menu-ornament .ornament-line:last-child {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.menu-ornament span {
+  font-size: 8px;
+  color: var(--gold);
+}
+
+.menu-footer-note p {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+  line-height: 2;
+}
+.menu-footer-sub {
+  color: var(--text-muted) !important;
+  margin-top: 0.4rem;
+}
+
+/* ── Card entry animation ── */
+@keyframes menuCardIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .menu-grid { grid-template-columns: repeat(2, 1fr); }
+  .menu-card--featured { grid-template-columns: 1fr 1fr; }
+  .featured-img-wrap { height: 320px; }
+}
+
+@media (max-width: 768px) {
+  .menu-tabbar { flex-wrap: wrap; }
+  .menu-tab {
+    flex: 1;
+    min-width: 120px;
+    border-right: 1px solid var(--border-gold);
+    border-radius: 0 !important;
+  }
+  .menu-grid { grid-template-columns: 1fr; }
+  .menu-card--featured {
+    grid-column: 1;
+    grid-template-columns: 1fr;
+  }
+  .featured-img-wrap { height: 240px; }
+  .featured-body { padding: 1.8rem; }
+  .menu-category-banner { height: 240px; }
+  .banner-text { left: 5%; max-width: 85%; }
+  .banner-title { font-size: clamp(2rem, 7vw, 3rem); }
+}
