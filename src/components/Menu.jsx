@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback, memo } from 'react'
 import './Menu.css'
 
 /* ── Category cover images (one hero per tab) ── */
@@ -213,30 +213,28 @@ const menuData = {
 }
 
 const tabs = [
-  { key: 'starters', label: 'Starters', icon: '✦' },
-  { key: 'mains', label: 'Mains', icon: '✦' },
-  { key: 'desserts', label: 'Desserts', icon: '✦' },
-  { key: 'drinks', label: 'Drinks', icon: '✦' },
+  { key: 'starters', label: 'Starters' },
+  { key: 'mains',    label: 'Mains'    },
+  { key: 'desserts', label: 'Desserts' },
+  { key: 'drinks',   label: 'Drinks'   },
 ]
 
-/* ── Single dish card ── */
-function DishCard({ dish, index, featured }) {
-  const [hovered, setHovered] = useState(false)
+/* ─────────────────────────────────────────────
+   DishCard — memo'd so it never re-renders
+   unless its own dish prop changes.
+   Hover is handled purely in CSS via :hover —
+   no JS useState, no React re-renders.
+───────────────────────────────────────────── */
+const DishCard = memo(function DishCard({ dish, index, featured }) {
+  const delay = `${index * 0.06}s`
 
   if (featured) {
     return (
-      <article
-        className="menu-card menu-card--featured"
-        style={{ animationDelay: `${index * 0.07}s` }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <article className="menu-card menu-card--featured" style={{ animationDelay: delay }}>
         <div className="featured-img-wrap">
-          <img src={dish.img} alt={dish.name} loading="lazy" />
+          <img src={dish.img} alt={dish.name} loading="lazy" decoding="async" />
           <div className="featured-img-overlay" />
-          <div className="featured-badge">
-            <span>✦</span> Chef's Selection
-          </div>
+          <div className="featured-badge"><span>✦</span> Chef's Selection</div>
         </div>
         <div className="featured-body">
           <div className="dish-header">
@@ -254,15 +252,10 @@ function DishCard({ dish, index, featured }) {
   }
 
   return (
-    <article
-      className="menu-card"
-      style={{ animationDelay: `${index * 0.07}s` }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
+    <article className="menu-card" style={{ animationDelay: delay }}>
       <div className="card-img-wrap">
-        <img src={dish.img} alt={dish.name} loading="lazy" />
-        <div className={`card-img-overlay${hovered ? ' hovered' : ''}`} />
+        <img src={dish.img} alt={dish.name} loading="lazy" decoding="async" />
+        <div className="card-img-overlay" />
       </div>
       <div className="card-body">
         <div className="dish-header">
@@ -277,38 +270,30 @@ function DishCard({ dish, index, featured }) {
       <div className="card-border-anim" aria-hidden="true" />
     </article>
   )
-}
+})
 
 export default function Menu() {
   const [active, setActive] = useState('starters')
-  const [animKey, setAnimKey] = useState(0)
 
-  const handleTabChange = (key) => {
-    setActive(key)
-    setAnimKey(k => k + 1)
-  }
+  // useCallback so the fn ref is stable → tabs never re-render unnecessarily
+  const handleTabChange = useCallback((key) => setActive(key), [])
 
-  const meta = categoryMeta[active]
+  const meta   = categoryMeta[active]
   const dishes = menuData[active]
 
   return (
     <section id="menu" className="menu" aria-labelledby="menu-heading">
 
-      {/* ── Ambient background ── */}
       <div className="menu-ambient" aria-hidden="true" />
 
-      {/* ── Section header ── */}
       <div className="section-wrap">
         <div className="menu-section-header">
           <span className="label-text">Culinary Journey</span>
           <div className="gold-line" />
           <h2 id="menu-heading" className="menu-heading">The Menu</h2>
-          <p className="menu-subheading">
-            Each dish is a verse. Together, they compose a poem of India.
-          </p>
+          <p className="menu-subheading">Each dish is a verse. Together, they compose a poem of India.</p>
         </div>
 
-        {/* ── Tab bar ── */}
         <div className="menu-tabbar" role="tablist" aria-label="Menu categories">
           {tabs.map(t => (
             <button
@@ -319,17 +304,16 @@ export default function Menu() {
               aria-selected={active === t.key}
               id={`tab-${t.key}`}
             >
-              <span className="tab-icon">{t.icon}</span>
               {t.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* ── Category hero banner ── */}
-      <div className="menu-category-banner" key={`banner-${active}`}>
+      {/* Category hero banner — keyed to active so React replaces it cleanly */}
+      <div className="menu-category-banner" key={active}>
         <div className="banner-img-wrap">
-          <img src={meta.cover} alt={meta.coverAlt} />
+          <img src={meta.cover} alt={meta.coverAlt} loading="lazy" decoding="async" />
           <div className="banner-gradient" />
         </div>
         <div className="banner-text">
@@ -344,9 +328,9 @@ export default function Menu() {
         </div>
       </div>
 
-      {/* ── Dish grid ── */}
       <div className="section-wrap">
-        <div className="menu-grid" key={animKey}>
+        {/* Grid keyed to active — lets React efficiently diff only changed items */}
+        <div className="menu-grid" key={active}>
           {dishes.map((dish, i) => (
             <DishCard
               key={dish.name}
@@ -357,19 +341,14 @@ export default function Menu() {
           ))}
         </div>
 
-        {/* ── Footer note ── */}
         <div className="menu-footer-note">
           <div className="menu-ornament" aria-hidden="true">
             <div className="ornament-line" />
             <span>◆</span>
             <div className="ornament-line" />
           </div>
-          <p>
-            All dishes prepared à la minute · Prices exclusive of taxes · Please inform us of any allergies
-          </p>
-          <p className="menu-footer-sub">
-            A discretionary service charge of 10% will be added to your bill
-          </p>
+          <p>All dishes prepared à la minute · Prices exclusive of taxes · Please inform us of any allergies</p>
+          <p className="menu-footer-sub">A discretionary service charge of 10% will be added to your bill</p>
         </div>
       </div>
 
