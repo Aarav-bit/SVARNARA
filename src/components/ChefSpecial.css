@@ -1,0 +1,249 @@
+.chef-special {
+  position: relative;
+  padding: 9rem 0;
+  overflow: hidden;
+}
+
+/* Burgundy-tinted bg */
+.cs-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(107,26,42,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 50%, rgba(201,168,76,0.07) 0%, transparent 55%),
+    linear-gradient(180deg, transparent 0%, rgba(107,26,42,0.06) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Inner layout ── */
+.cs-inner {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* ── Left: Text side ── */
+.cs-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.cs-badge {
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  border-radius: 99px;
+}
+
+.cs-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+}
+
+.cs-day-tag {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+  font-style: italic;
+}
+
+.cs-dish-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 600;
+  font-style: italic;
+  background: linear-gradient(135deg, var(--gold-light), var(--saffron), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.15;
+  margin-bottom: 1.4rem;
+}
+
+.cs-description {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--cream-dim);
+  max-width: 540px;
+  margin-bottom: 1.8rem;
+}
+
+.cs-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.4rem;
+}
+
+.cs-tag {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--saffron);
+}
+
+.cs-pairing {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.cs-footer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cs-price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+/* ── Right: Visual card ── */
+.cs-card {
+  position: relative;
+}
+
+.cs-card-inner {
+  position: relative;
+  background: linear-gradient(135deg,
+    rgba(28, 21, 16, 0.9) 0%,
+    rgba(40, 28, 20, 0.85) 50%,
+    rgba(107, 26, 42, 0.15) 100%
+  );
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  padding: 3rem 2.4rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  overflow: hidden;
+  min-height: 360px;
+  justify-content: center;
+  box-shadow:
+    0 0 60px rgba(107, 26, 42, 0.15),
+    inset 0 1px 0 rgba(201, 168, 76, 0.12);
+}
+
+/* Glowing aura behind the emoji */
+.cs-card-glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: csGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes csGlowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.15); }
+}
+
+.cs-emoji-wrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(13,10,7,0.5);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 30px rgba(201,168,76,0.15);
+}
+
+.cs-emoji {
+  font-size: 3.2rem;
+  filter: drop-shadow(0 2px 12px rgba(244,167,32,0.35));
+  animation: csEmojiFloat 4s ease-in-out infinite;
+}
+
+@keyframes csEmojiFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.cs-card-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cs-card-today {
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--saffron);
+}
+
+.cs-card-name {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-style: italic;
+  color: var(--cream);
+  font-weight: 400;
+}
+
+.cs-card-price-tag {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.4rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--gold);
+  z-index: 2;
+}
+
+/* ── Corner accent lines ── */
+.cs-card-inner::before,
+.cs-card-inner::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 0.5;
+}
+.cs-card-inner::before {
+  top: 14px; left: 14px;
+  border-width: 1px 0 0 1px;
+}
+.cs-card-inner::after {
+  bottom: 14px; right: 14px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .cs-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .cs-card { max-width: 420px; margin: 0 auto; width: 100%; }
+  .cs-footer { flex-wrap: wrap; gap: 1.2rem; }
+}

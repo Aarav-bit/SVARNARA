@@ -1,0 +1,89 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.75s ease;
+  opacity: 1;
+}
+
+.loader--fade {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+/* Logo */
+.loader-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  animation: loaderReveal 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.loader-aurum {
+  font-family: var(--font-label);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.55em;
+  background: linear-gradient(
+    120deg,
+    var(--gold) 0%,
+    var(--saffron) 40%,
+    var(--gold-light) 60%,
+    var(--gold) 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 2.5s linear infinite;
+}
+
+.loader-sub {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  animation: loaderReveal 0.9s 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Progress bar */
+.loader-bar {
+  width: 160px;
+  height: 1px;
+  background: var(--border-gold);
+  border-radius: 99px;
+  overflow: hidden;
+  animation: loaderReveal 0.5s 0.5s ease both;
+}
+
+.loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--saffron));
+  animation: loaderProgress 2s 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  border-radius: 99px;
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+
+@keyframes loaderReveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loaderProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
