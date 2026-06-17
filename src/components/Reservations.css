@@ -6,7 +6,7 @@
 
 .res-bg-gradient {
   position: absolute; inset: 0;
-  background: 
+  background:
     radial-gradient(ellipse at 20% 50%, rgba(107,26,42,0.08) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 50%, rgba(244,167,32,0.05) 0%, transparent 60%);
   pointer-events: none;
@@ -33,7 +33,7 @@
   font-size: 0.98rem;
 }
 
-/* Form */
+/* ── Form ── */
 .reservation-form {
   margin-top: 3.5rem;
   text-align: left;
@@ -66,8 +66,12 @@
   background-clip: text;
 }
 
+.req-star {
+  color: var(--saffron);
+  -webkit-text-fill-color: var(--saffron);
+}
+
 .form-group input,
-.form-group select,
 .form-group textarea {
   background: transparent;
   border: none;
@@ -80,8 +84,6 @@
   outline: none;
   transition: border-color var(--tr-fast), box-shadow var(--tr-fast);
   width: 100%;
-  -webkit-appearance: none;
-  appearance: none;
 }
 
 .form-group input::placeholder,
@@ -89,24 +91,20 @@
   color: var(--text-muted);
 }
 
-.form-group select {
-  cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23C9A84C' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0 center;
-  padding-right: 1.5rem;
-}
-
-.form-group select option {
-  background: #1C1510;
-  color: var(--cream);
-}
-
 .form-group input:focus,
-.form-group select:focus,
 .form-group textarea:focus {
   border-bottom-color: var(--saffron);
   box-shadow: 0 2px 0 rgba(244,167,32,0.15);
+}
+
+/* Date input calendar icon color */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+  cursor: pointer;
+  opacity: 0.7;
+}
+.form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 .form-group textarea {
@@ -114,6 +112,113 @@
   line-height: 1.7;
 }
 
+/* ── Inline field errors ── */
+.has-error input,
+.has-error textarea {
+  border-bottom-color: #c0392b !important;
+}
+
+.field-error {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #e07070;
+  margin-top: 0.2rem;
+}
+
+/* ── Time Pill Picker ── */
+.time-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.4rem;
+}
+
+.time-pill {
+  background: transparent;
+  border: 1px solid var(--border-gold);
+  color: var(--cream-dim);
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background var(--tr-fast), color var(--tr-fast),
+              border-color var(--tr-fast), box-shadow var(--tr-fast);
+}
+
+.time-pill:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.time-pill.active {
+  background: linear-gradient(135deg, var(--gold), var(--saffron));
+  border-color: transparent;
+  color: var(--espresso);
+  font-weight: 600;
+  box-shadow: 0 0 16px rgba(201,168,76,0.35);
+}
+
+/* ── Guest Stepper ── */
+.guest-stepper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.4rem;
+  border-bottom: 1px solid var(--border-gold);
+  padding-bottom: 0.8rem;
+}
+
+.stepper-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-gold);
+  background: transparent;
+  color: var(--gold);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--tr-fast), border-color var(--tr-fast),
+              box-shadow var(--tr-fast), color var(--tr-fast);
+  flex-shrink: 0;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--gold), var(--saffron));
+  border-color: transparent;
+  color: var(--espresso);
+  box-shadow: 0 0 14px rgba(201,168,76,0.35);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.stepper-value {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--cream);
+  min-width: 120px;
+  text-align: center;
+}
+
+.stepper-tag {
+  font-family: var(--font-label);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--saffron);
+}
+
+/* ── Submit Area ── */
 .form-submit {
   text-align: center;
   margin-top: 0.5rem;
@@ -128,7 +233,7 @@
   line-height: 1.8;
 }
 
-/* Toast */
+/* ── Toast ── */
 .res-toast {
   position: fixed;
   bottom: 2rem; left: 50%;
@@ -153,7 +258,18 @@
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+.res-toast.error {
+  border-color: #c0392b;
+  border-left-color: #e74c3c;
+  box-shadow: 0 8px 40px rgba(192, 57, 43, 0.2);
+}
+.res-toast.success {
+  border-color: var(--gold);
+  border-left-color: var(--saffron);
+}
 
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
+  .time-pills { gap: 0.5rem; }
+  .time-pill { font-size: 9px; padding: 0.5rem 0.85rem; }
 }
