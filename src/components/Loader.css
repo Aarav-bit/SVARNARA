@@ -31,7 +31,7 @@
   animation: loaderReveal 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-.loader-aurum {
+.loader-brand {
   font-family: var(--font-label);
   font-size: clamp(2.8rem, 7vw, 5rem);
   font-weight: 700;

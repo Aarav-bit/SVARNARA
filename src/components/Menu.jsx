@@ -1,11 +1,11 @@
-import { useState, useCallback, memo } from 'react'
+﻿import { useState, useCallback, memo } from 'react'
 import './Menu.css'
 
 /* ── Category cover images (one hero per tab) ── */
 const categoryMeta = {
   starters: {
     cover: '/images/menu_kebab.png',
-    coverAlt: 'Gilafi Seekh Kebab — AURUM signature starter',
+    coverAlt: 'Gilafi Seekh Kebab — SVARNARA signature starter',
     coverLabel: 'Starters',
     coverDesc: 'Small plates that speak volumes — each a prelude to the evening ahead.',
   },
@@ -17,7 +17,7 @@ const categoryMeta = {
   },
   desserts: {
     cover: '/images/gal3.png',
-    coverAlt: 'AURUM signature dessert',
+    coverAlt: 'SVARNARA signature dessert',
     coverLabel: 'Desserts',
     coverDesc: 'A sweet finale — where ancient mithai meets modern artistry.',
   },
@@ -99,14 +99,14 @@ const menuData = {
       img: '/images/gal4.png',
     },
     {
-      name: 'Dal Makhani AURUM',
+      name: 'Dal Makhani SVARNARA',
       price: '₹ 945',
       desc: 'Black lentils and kidney beans simmered for 18 hours, butter, cream, house-made spice blend. Our most requested dish since 2009.',
       tags: ['Legend', 'Vegetarian'],
       img: '/images/gal1.png',
     },
     {
-      name: 'Raan-e-Aurum',
+      name: 'Raan-e-Svarnara',
       price: '₹ 3,400',
       desc: 'Whole leg of lamb, Rajasthani spice rub, slow-cooked 12 hours, finished on coal grill. Serves 2. 24-hour advance notice required.',
       tags: ['For Two', 'Royal'],
@@ -160,7 +160,7 @@ const menuData = {
     {
       name: 'Meetha Paan Shot',
       price: '₹ 350',
-      desc: "Betel leaf, gulkand, fennel and coconut palate cleanser — AURUM's signature end to every meal.",
+      desc: "Betel leaf, gulkand, fennel and coconut palate cleanser — SVARNARA's signature end to every meal.",
       tags: ['Palate Cleanser', 'Signature'],
       img: '/images/gal3.png',
     },
@@ -182,7 +182,7 @@ const menuData = {
       img: '/images/gallery_wine.png',
     },
     {
-      name: 'AURUM Mango Lassi',
+      name: 'SVARNARA Mango Lassi',
       price: '₹ 420',
       desc: 'Alphonso mango, thick yogurt, cardamom, kesar, topped with malai. The finest lassi in Delhi.',
       tags: ['Non-Alcoholic', 'Seasonal'],
@@ -355,3 +355,4 @@ export default function Menu() {
     </section>
   )
 }
+

@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import './Testimonials.css'
 
 const testimonials = [
   {
     stars: 5,
-    text: "AURUM has done what no restaurant in India has done before — elevated our cuisine without stripping its soul. The Dum Pukht Gosht brought me to tears. I have dined in the world's finest restaurants, and this belongs among them.",
+    text: "SVARNARA has done what no restaurant in India has done before — elevated our cuisine without stripping its soul. The Dum Pukht Gosht brought me to tears. I have dined in the world's finest restaurants, and this belongs among them.",
     name: "Vikram Nair",
     role: "Founder, The Leela Group · 22 Visits"
   },
@@ -16,13 +16,13 @@ const testimonials = [
   },
   {
     stars: 5,
-    text: "We hosted our engagement dinner here and AURUM transformed it into something from a dream. The team remembered our names the moment we arrived. The Gulab Jamun Soufflé was pure theatre. Utterly unforgettable.",
+    text: "We hosted our engagement dinner here and SVARNARA transformed it into something from a dream. The team remembered our names the moment we arrived. The Gulab Jamun Soufflé was pure theatre. Utterly unforgettable.",
     name: "Rohan & Meera Kapoor",
     role: "Private Dining Event · New Delhi"
   },
   {
     stars: 5,
-    text: "As someone who writes about food for a living, AURUM has silenced me. The Gilafi Seekh Kebab starter, the Dal Makhani cooked for eighteen hours, the Shahi Tukda at the end — every single element perfection.",
+    text: "As someone who writes about food for a living, SVARNARA has silenced me. The Gilafi Seekh Kebab starter, the Dal Makhani cooked for eighteen hours, the Shahi Tukda at the end — every single element perfection.",
     name: "Aditi Sharma",
     role: "Culinary Editor · Condé Nast Traveller India"
   },
@@ -86,3 +86,4 @@ export default function Testimonials() {
     </section>
   )
 }
+

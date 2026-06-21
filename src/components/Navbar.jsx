@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import './Navbar.css'
 
 const links = [
@@ -6,6 +6,7 @@ const links = [
   { href: '#menu', label: 'Menu' },
   { href: '#gallery', label: 'Gallery' },
   { href: '#testimonials', label: 'Experience' },
+  { href: '#faq', label: 'FAQ' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -39,7 +40,7 @@ export default function Navbar() {
       <nav id="navbar" className={`navbar${scrolled ? ' scrolled' : ''}`} role="navigation">
         <div className="nav-inner">
           <a href="#hero" className="nav-logo" onClick={e => scrollTo(e, '#hero')}>
-            AURUM
+            SVARNARA
             <span>Fine Dining · India</span>
           </a>
 
@@ -78,3 +79,4 @@ export default function Navbar() {
     </>
   )
 }
+

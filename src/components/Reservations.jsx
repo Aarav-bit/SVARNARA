@@ -1,12 +1,11 @@
 import { useState } from 'react'
+import { submitLead } from '../submissions'
 import './Reservations.css'
 
 const TIME_SLOTS = [
   '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM',
   '9:00 PM', '9:30 PM', '10:00 PM'
 ]
-
-const REQUIRED = ['name', 'email', 'date', 'time', 'party']
 
 function Toast({ msg, show, type }) {
   return (
@@ -22,6 +21,7 @@ export default function Reservations() {
   })
   const [errors, setErrors] = useState({})
   const [toast, setToast] = useState({ show: false, msg: '', type: '' })
+  const [submitting, setSubmitting] = useState(false)
 
   // Generic field change
   const onChange = e => {
@@ -59,7 +59,7 @@ export default function Reservations() {
     return newErrors
   }
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length > 0) {
@@ -68,15 +68,25 @@ export default function Reservations() {
       setTimeout(() => setToast({ show: false, msg: '', type: '' }), 4000)
       return
     }
-    // Success
-    setToast({
-      show: true,
-      type: 'success',
-      msg: `🙏 Dhanyavaad, ${form.name.split(' ')[0]}! Your table for ${form.party} on ${form.date} at ${form.time} has been received. We'll confirm within 2 hours.`
-    })
-    setForm({ name: '', date: '', time: '', party: 1, email: '', phone: '', requests: '' })
-    setErrors({})
-    setTimeout(() => setToast({ show: false, msg: '', type: '' }), 6000)
+
+    setSubmitting(true)
+    try {
+      const result = await submitLead('reservation', form)
+      const localNote = result.mode === 'local' ? ' Saved to the local demo inbox.' : ''
+      setToast({
+        show: true,
+        type: 'success',
+        msg: `🙏 Dhanyavaad, ${form.name.split(' ')[0]}! Your table for ${form.party} on ${form.date} at ${form.time} has been received.${localNote} We'll confirm within 2 hours.`
+      })
+      setForm({ name: '', date: '', time: '', party: 1, email: '', phone: '', requests: '' })
+      setErrors({})
+      setTimeout(() => setToast({ show: false, msg: '', type: '' }), 6000)
+    } catch (error) {
+      setToast({ show: true, msg: error.message, type: 'error' })
+      setTimeout(() => setToast({ show: false, msg: '', type: '' }), 5000)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   // Min date = today
@@ -106,6 +116,7 @@ export default function Reservations() {
               <input
                 id="res-name" name="name" type="text" value={form.name}
                 onChange={onChange} placeholder="Your name" autoComplete="name"
+                aria-invalid={!!errors.name}
               />
               {errors.name && <span className="field-error">{errors.name}</span>}
             </div>
@@ -114,6 +125,7 @@ export default function Reservations() {
               <input
                 id="res-email" name="email" type="email" value={form.email}
                 onChange={onChange} placeholder="you@email.com" autoComplete="email"
+                aria-invalid={!!errors.email}
               />
               {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
@@ -126,6 +138,7 @@ export default function Reservations() {
               <input
                 id="res-date" name="date" type="date" value={form.date}
                 onChange={onChange} min={today}
+                aria-invalid={!!errors.date}
               />
               {errors.date && <span className="field-error">{errors.date}</span>}
             </div>
@@ -193,8 +206,8 @@ export default function Reservations() {
           </div>
 
           <div className="form-submit">
-            <button type="submit" className="btn btn-gold" id="res-submit-btn">
-              Book My Table
+            <button type="submit" className="btn btn-gold" id="res-submit-btn" disabled={submitting}>
+              {submitting ? 'Booking...' : 'Book My Table'}
             </button>
             <p className="res-note">
               We confirm within 2 hours · Cancellations accepted up to 24 hours prior · Dress code: Smart Casual

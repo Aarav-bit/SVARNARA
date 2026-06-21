@@ -5,6 +5,7 @@ export default function Cursor() {
   const dotRef  = useRef(null)
   const ringRef = useRef(null)
   const [visible, setVisible] = useState(false)
+  const visibleRef = useRef(false)
   const pos = useRef({ x: 0, y: 0 })
   const ring = useRef({ x: 0, y: 0 })
   const raf  = useRef(null)
@@ -15,7 +16,10 @@ export default function Cursor() {
 
     const onMove = e => {
       pos.current = { x: e.clientX, y: e.clientY }
-      if (!visible) setVisible(true)
+      if (!visibleRef.current) {
+        visibleRef.current = true
+        setVisible(true)
+      }
       if (dotRef.current) {
         dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
       }

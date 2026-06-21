@@ -46,6 +46,17 @@ img { display: block; max-width: 100%; object-fit: cover; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 button, input, textarea, select { font-family: inherit; }
+button:disabled { cursor: not-allowed; opacity: 0.65; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--saffron);
+  outline-offset: 4px;
+}
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--espresso); }
@@ -175,4 +186,17 @@ button, input, textarea, select { font-family: inherit; }
 /* ─── Responsive helpers ─────────────────────────────────── */
 @media (max-width: 768px) {
   .hide-mobile { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }

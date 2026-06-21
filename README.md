@@ -1,13 +1,13 @@
-# 🏛️ AURUM Fine Dining
+﻿# 🏛️ SVARNARA Fine Dining
 > **Where Every Plate Tells a Story.** A cinematic, luxury web experience designed for the premier Indian fine-dining destination in New Delhi.
 
-AURUM is a premium single-page web application showcasing a luxurious Indian culinary journey. The application features a striking dark espresso and aged gold visual identity, a custom filterable menu, a interactive reservation portal, and micro-animations that reflect the premium dining experience.
+SVARNARA is a premium single-page web application showcasing a luxurious Indian culinary journey. The application features a striking dark espresso and aged gold visual identity, a custom filterable menu, a working reservation/contact flow, SEO/AEO metadata, structured data, and micro-animations that reflect the premium dining experience.
 
 ---
 
 ## 🎨 Design System & Aesthetics
 
-AURUM's design system is crafted to evoke luxury, heritage, and sophistication:
+SVARNARA's design system is crafted to evoke luxury, heritage, and sophistication:
 
 *   **Color Palette:**
     *   `Espresso Dark (#0D0A07)`: The primary background color representing warmth, soil, and the mystery of night.
@@ -28,9 +28,13 @@ AURUM's design system is crafted to evoke luxury, heritage, and sophistication:
 *   **Our Story (About):** A split-screen narrative profiling the culinary philosophy of Executive Chef Ranveer Brar.
 *   **Interactive Menu Matrix:** Filterable category tabs (Starters, Mains, Desserts, Wine & Spirits) showcasing Indian gourmet dishes (e.g., Awadhi Galouti Kebab, Dum Pukht Biryani, Royal Kesar Phirni) with pricing in INR (₹) and high-definition food visual cards.
 *   **Luxury Reservation Desk:** A bespoke centered booking form with bottom-bordered gold inputs and reservation status validations.
+*   **Working Lead Capture:** Reservation and contact submissions post to `VITE_FORMS_ENDPOINT` when configured, with local browser storage as a demo fallback.
 *   **Aura Gallery:** A responsive 3-column masonry grid displaying high-contrast ambiance and gourmet photography with golden border hover layouts.
 *   **Royal Reviews:** A burgundy-themed testimonial marquee highlighting customer reviews.
 *   **Interactive Contact Block:** Location mappings, timings, and custom reservation assistance links.
+*   **FAQ for AEO:** Direct question-and-answer content for common guest searches and answer engines.
+*   **SEO Foundation:** Canonical metadata, Open Graph/Twitter tags, `robots.txt`, `sitemap.xml`, and Restaurant/FAQ JSON-LD.
+*   **Security & Accessibility:** Static host headers, iframe restrictions, visible focus states, reduced-motion support, and legal/accessibility pages.
 
 ---
 
@@ -65,11 +69,31 @@ npm run dev
 ```
 *The dev server will spin up locally, usually at `http://localhost:5173/`.*
 
-### 4. Build for Production
+### 4. Optional Form Endpoint
+Create `.env` from `.env.example` and add a form endpoint if you want submissions sent to a backend or service:
+```bash
+VITE_FORMS_ENDPOINT=https://your-form-endpoint.example/submit
+```
+Without this value, submissions are saved in browser localStorage as a working internship demo.
+
+### 5. Quality Checks
+```bash
+npm run lint
+npm run build
+```
+
+### 6. Build for Production
 To bundle the project into optimized static files for deployment (creates the `dist` folder):
 ```bash
 npm run build
 ```
+
+## 🔎 SEO, AEO & Security Work
+
+*   **SEO:** Added canonical URL, social sharing metadata, crawl directives, sitemap, robots file, and image preview metadata.
+*   **AEO:** Added visible FAQ content and JSON-LD for `Restaurant` and `FAQPage`.
+*   **Security:** Added static hosting headers in `public/_headers`, safer iframe attributes, and form submission error handling.
+*   **Accessibility:** Added keyboard-friendly gallery controls, focus states, reduced-motion support, and an accessibility statement.
 
 ---
 
@@ -105,4 +129,5 @@ Restraunt-web/
 ## 📜 License & Acknowledgments
 
 *   **License:** MIT
-*   **Concept & Design:** Built as a bespoke Indian high-luxury dining site concept for *AURUM*.
+*   **Concept & Design:** Built as a bespoke Indian high-luxury dining site concept for *SVARNARA*.
+

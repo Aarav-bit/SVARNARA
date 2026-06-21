@@ -1,4 +1,4 @@
-import './About.css'
+﻿import './About.css'
 
 export default function About() {
   return (
@@ -15,7 +15,7 @@ export default function About() {
           </h2>
 
           <p className="about-body">
-            AURUM was born from one profound belief: that Indian cuisine, in all its magnificent 
+            SVARNARA was born from one profound belief: that Indian cuisine, in all its magnificent 
             complexity, deserves a stage as grand as the finest restaurants in the world. Chef Arjun 
             Mehta spent fifteen years training under masters in Mumbai, Lucknow, and Paris before 
             returning home to build something extraordinary.
@@ -31,7 +31,7 @@ export default function About() {
           </div>
 
           <p className="about-body">
-            Located in the heart of New Delhi's Lutyens' Bungalow Zone, AURUM sources directly from 
+            Located in the heart of New Delhi's Lutyens' Bungalow Zone, SVARNARA sources directly from 
             artisan spice farmers in Kerala, heirloom grain growers in Punjab, and saffron cultivators 
             in Kashmir. Our tasting menu changes with the Indian seasons — always rooted in tradition, 
             always daring in execution.
@@ -75,3 +75,4 @@ export default function About() {
     </section>
   )
 }
+

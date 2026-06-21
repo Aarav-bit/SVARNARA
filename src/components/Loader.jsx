@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import './Loader.css'
 
 export default function Loader() {
@@ -18,7 +18,7 @@ export default function Loader() {
     <div className={`loader${phase === 'fading' ? ' loader--fade' : ''}`} aria-hidden="true">
       <div className="loader-inner">
         <div className="loader-logo">
-          <span className="loader-aurum">AURUM</span>
+          <span className="loader-brand">SVARNARA</span>
           <span className="loader-sub">Fine Dining · New Delhi</span>
         </div>
         <div className="loader-bar">
@@ -28,3 +28,4 @@ export default function Loader() {
     </div>
   )
 }
+
