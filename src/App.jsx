@@ -54,16 +54,49 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+
+        {/* Editorial flourishes — mirror the menu's ◆ — ◆ rhythm */}
         <About />
+        <div className="divider reveal" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-diamond">◆ ◆ ◆</span>
+          <span className="divider-line" />
+        </div>
+
         <ChefSpecial />
+
+        <div className="divider reveal" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-diamond">◆ ◆ ◆</span>
+          <span className="divider-line" />
+        </div>
+
         <Menu />
         <Reservations />
+
+        <div className="divider reveal" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-diamond">◆ ◆ ◆</span>
+          <span className="divider-line" />
+        </div>
+
         <Gallery />
+
+        <div className="divider reveal" aria-hidden="true">
+          <span className="divider-line" />
+          <span className="divider-diamond">◆ ◆ ◆</span>
+          <span className="divider-line" />
+        </div>
+
         <Testimonials />
         <FAQ />
         <Contact />
       </main>
       <Footer />
+
+      {/* Cinematic overlays — above content, below chrome. pointer-events:none. */}
+      <div className="vignette" aria-hidden="true" />
+      <div className="grain" aria-hidden="true" />
     </>
   )
 }

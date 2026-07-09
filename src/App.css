@@ -1,4 +1,4 @@
-/* App-level styles — gradient body, toasts, lightbox */
+/* App-level styles — gradient body, grain, vignette, dividers, toasts, lightbox */
 
 /* ─── Animated gradient body background ─────────────────── */
 body {
@@ -78,4 +78,82 @@ body {
   letter-spacing: 0.25em;
   cursor: pointer;
   padding: 0.4rem 0;
+}
+
+/* ─── Film grain overlay ─────────────────────────────────── */
+/* Fixed full-screen noise texture. pointer-events:none so it
+   never blocks clicks. z-index sits above page content but
+   below navbar(1000) / lightbox(2000) / toast(9999) / loader(99999). */
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 500;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainShift 1.2s steps(6) infinite;
+  mix-blend-mode: overlay;
+  will-change: transform;
+}
+
+/* Subtle 6-frame jitter so the grain feels alive, not static */
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  16%  { transform: translate(-4%, 3%); }
+  33%  { transform: translate(3%, -5%); }
+  50%  { transform: translate(-2%, 4%); }
+  66%  { transform: translate(5%, -2%); }
+  83%  { transform: translate(-3%, -3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ─── Vignette overlay ───────────────────────────────────── */
+/* Darkens edges only — deepens the cinematic feel without
+   dimming centre content. Sits just under the grain. */
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 499;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 0, 0.28) 88%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+/* ─── Ornamental section divider ─────────────────────────── */
+/* Editorial flourish between sections. Mirrors the menu's
+   existing ◆ — ◆ motif so the page reads as one rhythm.
+   Negative top margin pulls it up into the preceding section's
+   bottom padding so it anchors, rather than floats in dead space. */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  max-width: 1280px;
+  margin: -3rem auto 3rem;
+  padding: 0 2rem;
+}
+.divider-line {
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.divider-line:last-child {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.divider-diamond {
+  font-size: 8px;
+  color: var(--gold);
+  letter-spacing: 0.6em;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
 }
