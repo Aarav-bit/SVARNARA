@@ -1,4 +1,4 @@
-﻿import './Footer.css'
+import './Footer.css'
 
 const scrollTo = (e, href) => {
   e.preventDefault()
@@ -57,7 +57,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© 2026 SVARNARA Fine Dining Pvt. Ltd · 14 Prithviraj Road, New Delhi · FSSAI Lic: 10020042000001</p>
           <p className="footer-legal">
-            <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a> · <a href="/accessibility.html">Accessibility</a> · <a href="/sitemap.xml">Sitemap</a>
+            <a href="/privacy.html">Privacy Policy</a> · <a href="/terms.html">Terms of Service</a> · <a href="/accessibility.html">Accessibility</a> · <a href="/sitemap.xml">Sitemap</a> · <a href="?admin=true">Admin Portal</a>
           </p>
         </div>
       </div>

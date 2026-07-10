@@ -11,11 +11,15 @@ import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import AdminDashboard from './components/AdminDashboard'
 import './App.css'
 
 function App() {
+  const isAdmin = typeof window !== 'undefined' && window.location.search === '?admin=true'
+
   // Scroll reveal — re-observe after loader disappears
   useEffect(() => {
+    if (isAdmin) return
     const observe = () => {
       const observer = new IntersectionObserver(
         entries => entries.forEach(e => {
@@ -40,7 +44,18 @@ function App() {
     }, 3200)
 
     return () => { obs.disconnect(); clearTimeout(t) }
-  }, [])
+  }, [isAdmin])
+
+  if (isAdmin) {
+    return (
+      <>
+        <Loader />
+        <AdminDashboard />
+        <div className="vignette" aria-hidden="true" />
+        <div className="grain" aria-hidden="true" />
+      </>
+    )
+  }
 
   return (
     <>
