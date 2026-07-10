@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
-import Cursor from './components/Cursor'
 import Hero from './components/Hero'
 import About from './components/About'
 import Menu from './components/Menu'
@@ -47,9 +46,6 @@ function App() {
     <>
       {/* Splash loader */}
       <Loader />
-
-      {/* Custom gold cursor (desktop only) */}
-      <Cursor />
 
       <Navbar />
       <main>
