@@ -7,6 +7,12 @@ const TIME_SLOTS = [
   '9:00 PM', '9:30 PM', '10:00 PM'
 ]
 
+const ZONES = [
+  { id: 'mainhall', name: 'Main Dining Room', desc: 'Glass-roofed atrium featuring live instrumental sitar music.', img: '/images/gal2.png' },
+  { id: 'verandah', name: 'Saffron Verandah', desc: 'Al fresco dining under Delhi night skies, surrounded by candlelight.', img: '/images/gallery_wine.png' },
+  { id: 'maharaja', name: 'Maharaja Suite', desc: 'Private dining room with royal gold-leaf tapestries.', img: '/images/gal4.png' }
+]
+
 function Toast({ msg, show, type }) {
   return (
     <div className={`res-toast${show ? ' show' : ''} ${type || ''}`} role="alert">
@@ -17,7 +23,7 @@ function Toast({ msg, show, type }) {
 
 export default function Reservations() {
   const [form, setForm] = useState({
-    name: '', date: '', time: '', party: 1, email: '', phone: '', requests: ''
+    name: '', date: '', time: '', party: 1, email: '', phone: '', requests: '', zone: 'mainhall'
   })
   const [errors, setErrors] = useState({})
   const [toast, setToast] = useState({ show: false, msg: '', type: '' })
@@ -73,12 +79,13 @@ export default function Reservations() {
     try {
       const result = await submitLead('reservation', form)
       const localNote = result.mode === 'local' ? ' Saved to the local demo inbox.' : ''
+      const zoneName = ZONES.find(z => z.id === form.zone)?.name || 'Main Dining Room'
       setToast({
         show: true,
         type: 'success',
-        msg: `🙏 Dhanyavaad, ${form.name.split(' ')[0]}! Your table for ${form.party} on ${form.date} at ${form.time} has been received.${localNote} We'll confirm within 2 hours.`
+        msg: `🙏 Dhanyavaad, ${form.name.split(' ')[0]}! Your table in the ${zoneName} for ${form.party} guests on ${form.date} at ${form.time} has been received.${localNote} We'll confirm within 2 hours.`
       })
-      setForm({ name: '', date: '', time: '', party: 1, email: '', phone: '', requests: '' })
+      setForm({ name: '', date: '', time: '', party: 1, email: '', phone: '', requests: '', zone: 'mainhall' })
       setErrors({})
       setTimeout(() => setToast({ show: false, msg: '', type: '' }), 6000)
     } catch (error) {
@@ -108,6 +115,31 @@ export default function Reservations() {
         </div>
 
         <form className="reservation-form reveal d1" onSubmit={onSubmit} noValidate>
+
+          {/* Ambiance Zone Picker */}
+          <div className="form-group full">
+            <label>Select Dining Zone</label>
+            <div className="zone-grid" role="radiogroup" aria-label="Select dining zone">
+              {ZONES.map(z => (
+                <button
+                  key={z.id}
+                  type="button"
+                  className={`zone-card${form.zone === z.id ? ' active' : ''}`}
+                  onClick={() => setForm(f => ({ ...f, zone: z.id }))}
+                  role="radio"
+                  aria-checked={form.zone === z.id}
+                >
+                  <div className="zone-img-wrap">
+                    <img src={z.img} alt={z.name} loading="lazy" />
+                  </div>
+                  <div className="zone-info">
+                    <span className="zone-name">{z.name}</span>
+                    <span className="zone-desc">{z.desc}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* Row 1: Name + Email */}
           <div className="form-row">

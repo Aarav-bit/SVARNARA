@@ -273,3 +273,84 @@
   .time-pills { gap: 0.5rem; }
   .time-pill { font-size: 9px; padding: 0.5rem 0.85rem; }
 }
+
+/* ── Ambiance Zone Picker ── */
+.zone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.zone-card {
+  background: rgba(22, 17, 9, 0.6);
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: all var(--tr-fast);
+  padding: 0;
+}
+
+.zone-card:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.zone-card.active {
+  border-color: var(--saffron);
+  box-shadow: 0 0 15px rgba(244, 167, 32, 0.15);
+  background: rgba(201, 168, 76, 0.08);
+}
+
+.zone-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  overflow: hidden;
+}
+
+.zone-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.zone-card:hover .zone-img-wrap img {
+  transform: scale(1.05);
+}
+
+.zone-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.zone-name {
+  font-family: var(--font-label);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.zone-desc {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--cream-dim);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .zone-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
