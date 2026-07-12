@@ -1,0 +1,79 @@
+.mascot-floating {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 90px;
+  height: 90px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001; /* Above navbar (1000) */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease, filter var(--tr-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.mascot-floating.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mascot-floating img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Gentle vertical bobbing */
+  animation: mascotFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.45)) drop-shadow(0 0 8px var(--gold-glow));
+  transition: filter var(--tr-fast);
+}
+
+.mascot-floating:hover img {
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.55)) drop-shadow(0 0 15px rgba(244,167,32,0.45));
+}
+
+@keyframes mascotFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Tooltip */
+.mascot-tooltip {
+  position: absolute;
+  top: -2.2rem;
+  background: rgba(13, 10, 7, 0.95);
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  font-family: var(--font-label);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity var(--tr-fast);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.mascot-floating:hover .mascot-tooltip {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .mascot-floating {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 70px;
+    height: 70px;
+  }
+  /* Hide tooltip on touch devices */
+  .mascot-tooltip {
+    display: none;
+  }
+}
