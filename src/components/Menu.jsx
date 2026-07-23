@@ -189,6 +189,20 @@ export default function Menu() {
   const handleTabChange = useCallback((key) => setActive(key), [])
   const dishes = menuData[active]
 
+  const handleKeyDown = (e, index) => {
+    let newIndex
+    if (e.key === 'ArrowRight') {
+      newIndex = (index + 1) % tabs.length
+    } else if (e.key === 'ArrowLeft') {
+      newIndex = (index - 1 + tabs.length) % tabs.length
+    } else {
+      return // Not an arrow key
+    }
+    const newTab = tabs[newIndex]
+    handleTabChange(newTab.key)
+    document.getElementById(`tab-${newTab.key}`)?.focus()
+  }
+
   return (
     <section id="menu" className="menu" aria-labelledby="menu-heading">
       <div className="menu-ambient" aria-hidden="true" />
@@ -202,21 +216,31 @@ export default function Menu() {
         </div>
 
         <div className="menu-tabbar" role="tablist" aria-label="Menu categories">
-          {tabs.map(t => (
+          {tabs.map((t, index) => (
             <button
               key={t.key}
               className={`menu-tab${active === t.key ? ' active' : ''}`}
               onClick={() => handleTabChange(t.key)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               role="tab"
               aria-selected={active === t.key}
+              aria-controls={`panel-${t.key}`}
               id={`tab-${t.key}`}
+              tabIndex={active === t.key ? 0 : -1}
             >
               {t.label}
             </button>
           ))}
         </div>
 
-        <div className="menu-classic-grid" key={active}>
+        <div
+          id={`panel-${active}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${active}`}
+          className="menu-classic-grid"
+          key={active}
+          tabIndex={0}
+        >
           {dishes.map(dish => (
             <DishItem key={dish.name} dish={dish} />
           ))}
