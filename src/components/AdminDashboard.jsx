@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './AdminDashboard.css'
 
 const STORAGE_KEY = 'svarnara-submissions'
 
 export default function AdminDashboard() {
-  const [submissions, setSubmissions] = useState([])
+  const [submissions, setSubmissions] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+    } catch {
+      return []
+    }
+  })
   const [search, setSearch] = useState('')
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    setSubmissions(data)
-  }, [])
 
   const deleteSubmission = id => {
     const updated = submissions.filter(s => s.id !== id)
