@@ -1,3 +1,7 @@
 ## 2024-07-23 - Proper ARIA Tab Pattern Implementation
 **Learning:** When implementing tabbed interfaces, just adding `role="tab"` and `aria-selected` is not enough for screen readers and keyboard users. A fully accessible W3C ARIA tab pattern requires `aria-controls` linking to a `tabpanel`, explicit `tabIndex` management (only active tab is focusable with `0`, others `-1`), and keyboard event handlers (left/right arrows) to shift focus intuitively between tabs.
 **Action:** Always implement explicit keyboard navigation (`ArrowLeft` / `ArrowRight`) and manage `tabIndex` alongside `aria-controls` and `aria-labelledby` when building custom tab components to ensure they are fully navigable and descriptive for assistive technologies.
+
+## 2024-08-01 - Prevent Page Scroll on Custom Buttons
+**Learning:** When using custom UI elements with `role="button"` and `onKeyDown` handlers for keyboard navigation (specifically Space and Enter keys), the browser's default behavior might trigger unintended actions like scrolling down the page.
+**Action:** Always call `e.preventDefault()` within the `onKeyDown` handler for Space and Enter keys on custom button implementations to ensure the page doesn't jump or scroll when the user interacts with the element using a keyboard.
