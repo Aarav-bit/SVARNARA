@@ -1,3 +1,3 @@
-## 2024-07-23 - Proper ARIA Tab Pattern Implementation
-**Learning:** When implementing tabbed interfaces, just adding `role="tab"` and `aria-selected` is not enough for screen readers and keyboard users. A fully accessible W3C ARIA tab pattern requires `aria-controls` linking to a `tabpanel`, explicit `tabIndex` management (only active tab is focusable with `0`, others `-1`), and keyboard event handlers (left/right arrows) to shift focus intuitively between tabs.
-**Action:** Always implement explicit keyboard navigation (`ArrowLeft` / `ArrowRight`) and manage `tabIndex` alongside `aria-controls` and `aria-labelledby` when building custom tab components to ensure they are fully navigable and descriptive for assistive technologies.
+## 2023-10-25 - Custom UI Role Button Requires Event Prevention
+**Learning:** When assigning `role="button"` to non-button elements (like `div`), the browser's default behavior for space and enter keys (e.g., page scrolling) is not automatically suppressed by the element as it is with native `<button>` tags.
+**Action:** Always call `e.preventDefault()` within `onKeyDown` handlers attached to custom `role="button"` elements when triggered by Space or Enter keys to prevent unexpected layout shifting and enhance keyboard accessibility.
