@@ -48,7 +48,7 @@ export default function Gallery() {
             className="gallery-item"
             key={i}
             onClick={() => open(img)}
-            onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && open(img)}
+            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); } }}
             tabIndex={0}
             role="button"
             aria-label={`View: ${img.caption}`}
