@@ -76,6 +76,7 @@ export default function Testimonials() {
                   className={`carousel-dot${current === i ? ' active' : ''}`}
                   onClick={() => goTo(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
+                  aria-current={current === i ? 'true' : undefined}
                 />
               ))}
             </div>
